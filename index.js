@@ -51,10 +51,11 @@ const deviceName = puppeteer.devices[program.emulate];
     if (program.no) {
       await page.setRequestInterception(true);
       page.on('request', request => {
-        if (request.resourceType() === program.no)
+        if (request.resourceType() === program.no) {
           request.abort();
-          else
-        request.continue();
+        } else {
+          request.continue();
+        }
       });
     }
     const timestamp = new Date().getTime();
@@ -70,11 +71,11 @@ const deviceName = puppeteer.devices[program.emulate];
     if (program.vd) {
       await page.emulateVisionDeficiency(program.vd);
     }
-    if (program.emulate)
+    if (program.emulate) {
       await page.emulate(deviceName);
-    else
+    } else {
       program.emulate = '';
-
+    }
     if (program.auth) {
       const [username, password] = program.auth.split(';');
       await page.authenticate({ username, password });
